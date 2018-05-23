@@ -31,9 +31,10 @@ do
         passwd -u $username >/dev/null 2>&1;
         echo "${username}:${pwd}" | chpasswd
         chown -R $username:xfs /home/$username
+        for dir in .bash_logout .bashrc .profile ; do
+	    rm -f $dir
+	done
       fi
-      #mkdir -p /home/$username/.ssh
-      #echo "$keys" > /home/$username/.ssh/authorized_keys
       ;;
   esac
 done
