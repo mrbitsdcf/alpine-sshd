@@ -32,8 +32,8 @@ do
         echo "${username}:${pwd}" | chpasswd
         chown -R $username:xfs /home/$username
       fi
-      mkdir -p /home/$username/.ssh
-      echo "$keys" > /home/$username/.ssh/authorized_keys
+      #mkdir -p /home/$username/.ssh
+      #echo "$keys" > /home/$username/.ssh/authorized_keys
       ;;
   esac
 done
