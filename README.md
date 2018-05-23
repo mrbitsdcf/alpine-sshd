@@ -39,4 +39,5 @@ $ docker run --name alpine-sshd-foo --restart=always -d -e USER_foo=https://gith
 ## Changelog
 
 **2017-07-07** Initial version.
+
 **2018-05-23** Fork and allow SSH with password
