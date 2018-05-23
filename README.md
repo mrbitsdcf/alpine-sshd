@@ -1,6 +1,6 @@
 # Alpine-based sshd server
 
-This Docker image consists of a lightweight OpenSSH server running on [Alpine Linux 3.6](https://hub.docker.com/_/alpine/).
+This Docker image consists of a lightweight OpenSSH server running on [Alpine Linux 3.7](https://hub.docker.com/_/alpine/).
 
 ## Usage
 

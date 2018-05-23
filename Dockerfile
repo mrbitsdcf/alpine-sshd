@@ -1,7 +1,7 @@
-FROM alpine:3.6
+FROM alpine:3.7
 LABEL "Maintainer"="MrBiTs"
 LABEL "e-mail"="mrbits.dcf@gmail.com"
-LABEL "version"="0.3"
+LABEL "version"="0.4"
 
 RUN apk add --no-cache openssh curl \
     && cp /etc/ssh/sshd_config /sshd_config.orig
