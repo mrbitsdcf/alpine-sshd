@@ -21,7 +21,7 @@ Github and GitLab.
 ## Example
 
 ```
-$ docker run -d -e USER_foo=https://github.com/foo.keys -e PWD_foo=bar -p 8022:22 mrbits/alpine-sshd
+$ docker run --name alpine-sshd-foo --restart=always -d -e USER_foo=https://github.com/foo.keys -e PWD_foo=bar -p 8022:22 mrbits/alpine-sshd
 Creating user foo...
 Server listening on 0.0.0.0 port 22.
 Server listening on :: port 22.
@@ -31,7 +31,7 @@ $ ssh foo@localhost -p 8022
 
 With a volume:
 ```
-$ docker run -d -e USER_foo=https://github.com/foo.keys -e PWD_foo=bar -p 8022:22 -v /host/path:/home/xxx mrbits/alpine-sshd
+$ docker run --name alpine-sshd-foo --restart=always -d -e USER_foo=https://github.com/foo.keys -e PWD_foo=bar -p 8022:22 -v /host/path:/home/xxx mrbits/alpine-sshd
 
 # SSH host keys written to /host/path
 ```
