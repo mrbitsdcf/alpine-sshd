@@ -12,6 +12,8 @@ Root access is disabled. Users can be created via environment variables as follo
 `USER_xxx=yyy` creates a user called `xxx` and adds the public key(s) `yyy` to their
 `authorized_keys` file.
 
+`PWD_xxx=password` add `password` to user `xxx`
+
 `USER_xxx=https://zzz` creates a user called `xxx` and retrieves their public key(s) via the
 URL `https://zzz`. This allows for keys to be pulled from locations like
 Github and GitLab.
@@ -19,7 +21,7 @@ Github and GitLab.
 ## Example
 
 ```
-$ docker run --rm USER_foo=https://github.com/foo.keys -p 8022:22 bravissimolabs/alpine-sshd
+$ docker run -d -e USER_foo=https://github.com/foo.keys -e PWD_foo=bar -p 8022:22 mrbits/alpine-sshd
 Creating user foo...
 Server listening on 0.0.0.0 port 22.
 Server listening on :: port 22.
@@ -29,8 +31,7 @@ $ ssh foo@localhost -p 8022
 
 With a volume:
 ```
-$ docker run --rm USER_foo=https://github.com/foo.keys -v /host/path:/etc/ssh
-bravissimolabs/alpine-sshd
+$ docker run -d -e USER_foo=https://github.com/foo.keys -e PWD_foo=bar -p 8022:22 -v /host/path:/home/xxx mrbits/alpine-sshd
 
 # SSH host keys written to /host/path
 ```
@@ -38,3 +39,4 @@ bravissimolabs/alpine-sshd
 ## Changelog
 
 **2017-07-07** Initial version.
+**2018-05-23** Fork and allow SSH with password
