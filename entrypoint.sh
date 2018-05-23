@@ -30,7 +30,9 @@ do
         adduser -D -G xfs -u 1001 -s /bin/ash $username
         passwd -u $username >/dev/null 2>&1;
         echo "${username}:${pwd}" | chpasswd
-        chown -R $username:xfs /home/$username
+        mkdir /home/$username/incoming
+        chown root:root /home/$username
+        chown -R $username:xfs /home/$username/incoming
         for dir in .bash_logout .bashrc .profile .ssh ; do
 	    rm -f $dir
 	done
@@ -38,6 +40,19 @@ do
       ;;
   esac
 done
+
+#Configure chrooted SFTP
+
+sed 's/^Subsystem.*sftp.*$//g' /etc/ssh/sshd_config > /tmp/t.t && cp /tmp/t.t /etc/ssh/sshd_config
+
+cat <<__EOF__>>/etc/ssh/sshd_config
+Subsystem sftp internal-sftp
+Match Group xfs
+    ChrootDirectory /home/%u
+    X11Forwarding no
+    AllowTcpForwarding no
+    ForceCommand internal-sftp
+__EOF__
 
 # Start SSH daemon
 exec /usr/sbin/sshd -D -e  "$@"
