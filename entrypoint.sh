@@ -31,7 +31,7 @@ do
         passwd -u $username >/dev/null 2>&1;
         echo "${username}:${pwd}" | chpasswd
         chown -R $username:xfs /home/$username
-        for dir in .bash_logout .bashrc .profile ; do
+        for dir in .bash_logout .bashrc .profile .ssh ; do
 	    rm -f $dir
 	done
       fi
